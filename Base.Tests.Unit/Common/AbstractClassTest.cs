@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Base
@@ -56,6 +57,38 @@ namespace Base
             person.AbstractMethod();
             person.MyProperty.Should().Be(3);
             person.Surname.Should().Be("SurnameChanged");
+        }
+
+        abstract class AbstracClass
+        {
+            public abstract void Greet();
+
+            public void Show()
+            {
+                Console.WriteLine("Show in abstract class");
+            }
+        }
+
+        class DirivedClass : AbstracClass
+        {
+            public override void Greet()
+            {
+                Console.WriteLine("Greet in dirived class");
+            }
+
+            public void NewMethod()
+            {
+                Console.WriteLine("This is method in dirived method");
+            }
+        }
+
+        [Test]
+        public void AbstractTestCase()
+        {
+            var dirivedObj = new DirivedClass();
+            dirivedObj.Show();
+            dirivedObj.Greet();
+            dirivedObj.NewMethod();
         }
     }
 }
